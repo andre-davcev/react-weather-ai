@@ -1,0 +1,33 @@
+{
+  "name": "react-sandbox-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/react-sandbox-e2e/src",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/react-sandbox-e2e/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "react-sandbox:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "react-sandbox:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "react-sandbox:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/react-sandbox-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "implicitDependencies": ["react-sandbox"],
+  "tags": []
+}
